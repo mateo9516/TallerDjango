@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% block content%}
+
+<table class="table table=bordered">
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Cantidad de Envios anuales</td>
+			<td>Año de entrega</td>
+			<td>Nombre del Registrador</td>
+			<td>Proveedor</td>
+			<td>Acciones</td>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% if object_list %}
+		{% for registro in object_list %}
+
+		<tr>
+			<td>{{registro.id}}</td>
+			<td>{{registro.cantidad_envios_anuales}}</td>
+			<td>{{registro.año}}</td>
+			<td>{{registro.registrante}}</td>
+			<td>{{registro.proveedor.nombre}} {{registro.proveedor.apellidos}}</td>
+			<td>
+				<a class = "btn btn-danger" href="{% url 'Registro:registro_eliminar' registro.id %}">
+				ELIMINAR	
+				</a>
+				<a class = "btn btn-primary" href="{% url 'Registro:registro_editar' registro.id %}">
+				EDITAR	
+				</a>
+			</td>
+		</tr>
+
+		{% endfor %}
+		{% else %}
+		<h1> no hay mas registros </h1>
+		{% endif %}
+	
+	</tbody>
+
+</table>
+
+{% endblock %}		
